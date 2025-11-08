@@ -1,0 +1,81 @@
+version: '3.8'
+
+services:
+  # MongoDB Database
+  mongo:
+    image: mongo:7.0
+    container_name: accord-mongo
+    restart: unless-stopped
+    ports:
+      - "27017:27017"
+    environment:
+      - MONGO_INITDB_DATABASE=accord_compliance
+    volumes:
+      - mongo_data:/data/db
+    networks:
+      - accord-network
+    healthcheck:
+      test: ["CMD", "mongosh", "--eval", "db.adminCommand('ping')"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # FastAPI Application
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: accord-api
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    environment:
+      - ENVIRONMENT=development
+      - API_HOST=0.0.0.0
+      - API_PORT=8000
+      - MONGO_URI=mongodb://mongo:27017
+      - MONGO_DB_NAME=accord_compliance
+      - STORAGE_PATH=/app/storage
+      - LOG_LEVEL=INFO
+      - MODEL_ADAPTER=gemini_api
+      - EMBEDDING_ADAPTER=gemini_api
+      - IMAGE_CAPTION_ADAPTER=gemini_vision
+      - GOOGLE_API_KEY=${GOOGLE_API_KEY}
+      - GEMINI_MODEL_NAME=gemini-2.0-flash-exp
+      - PII_REDACTION_ENABLED=true
+    volumes:
+      - ./app:/app/app
+      - ./storage:/app/storage
+      - ./samples:/app/samples
+    depends_on:
+      mongo:
+        condition: service_healthy
+    networks:
+      - accord-network
+    command: uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
+
+  # Mongo Express - MongoDB Web UI
+  mongo-express:
+    image: mongo-express:latest
+    container_name: accord-mongo-express
+    restart: unless-stopped
+    ports:
+      - "8081:8081"
+    environment:
+      - ME_CONFIG_MONGODB_URL=mongodb://mongo:27017/
+      - ME_CONFIG_MONGODB_ENABLE_ADMIN=true
+      - ME_CONFIG_BASICAUTH_USERNAME=admin
+      - ME_CONFIG_BASICAUTH_PASSWORD=admin123
+    depends_on:
+      - mongo
+    networks:
+      - accord-network
+
+volumes:
+  mongo_data:
+    driver: local
+
+networks:
+  accord-network:
+    driver: bridge
+

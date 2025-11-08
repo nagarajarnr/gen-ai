@@ -1,0 +1,322 @@
+{
+  "info": {
+    "name": "Mini Ultra AI - Simplified API",
+    "description": "Simplified API collection with Authentication, Q&A (text/image/PDF), and Fine-tuning endpoints",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://localhost:8000",
+      "type": "string"
+    },
+    {
+      "key": "access_token",
+      "value": "",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "Health Check",
+      "item": [
+        {
+          "name": "Health Check",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/health",
+              "host": ["{{base_url}}"],
+              "path": ["health"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Authentication",
+      "item": [
+        {
+          "name": "Signup",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "if (pm.response.code === 201) {",
+                  "    var jsonData = pm.response.json();",
+                  "    pm.collectionVariables.set('access_token', jsonData.access_token);",
+                  "    console.log('Token saved:', jsonData.access_token);",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"testuser\",\n  \"email\": \"test@example.com\",\n  \"phone\": \"+1234567890\",\n  \"password\": \"SecurePass123!\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/v1/auth/signup",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "auth", "signup"]
+            }
+          }
+        },
+        {
+          "name": "Login",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "if (pm.response.code === 200) {",
+                  "    var jsonData = pm.response.json();",
+                  "    pm.collectionVariables.set('access_token', jsonData.access_token);",
+                  "    console.log('Token saved:', jsonData.access_token);",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"testuser\",\n  \"password\": \"SecurePass123!\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/v1/auth/login",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "auth", "login"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Q&A",
+      "item": [
+        {
+          "name": "Ask Text Question",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "question",
+                  "value": "What is artificial intelligence?",
+                  "type": "text",
+                  "description": "Your question text"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{base_url}}/api/v1/qa/text",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "qa", "text"]
+            },
+            "description": "Ask a text question without any file upload. Returns AI-generated answer using Gemini 2.0 Flash."
+          }
+        },
+        {
+          "name": "Ask Image Question",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "file",
+                  "type": "file",
+                  "src": "/path/to/your/image.jpg",
+                  "description": "Image file (JPEG, PNG, GIF, BMP, WebP)"
+                },
+                {
+                  "key": "question",
+                  "value": "What do you see in this image?",
+                  "type": "text",
+                  "description": "Your question about the image"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{base_url}}/api/v1/qa/image",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "qa", "image"]
+            },
+            "description": "Upload an image and ask a question about it. Returns AI-generated answer using Gemini Vision."
+          }
+        },
+        {
+          "name": "Ask PDF Question (8K Conversion)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "file",
+                  "type": "file",
+                  "src": "/path/to/your/document.pdf",
+                  "description": "PDF file to analyze"
+                },
+                {
+                  "key": "question",
+                  "value": "Summarize the key points in this document",
+                  "type": "text",
+                  "description": "Your question about the PDF"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{base_url}}/api/v1/qa/pdf",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "qa", "pdf"]
+            },
+            "description": "Upload a PDF and ask a question. The PDF is automatically converted to ultra HD 8K resolution images before being sent to Gemini for analysis."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Fine-Tuning",
+      "item": [
+        {
+          "name": "Upload Training Image",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "file",
+                  "type": "file",
+                  "src": "/path/to/training_image.png",
+                  "description": "Image file for training (JPEG, PNG, GIF, BMP)"
+                },
+                {
+                  "key": "prompt",
+                  "value": "Analyze this image for compliance issues",
+                  "type": "text",
+                  "description": "Training prompt/question for this image"
+                },
+                {
+                  "key": "expected_output",
+                  "value": "The image shows a compliant interface with proper logos and layout",
+                  "type": "text",
+                  "description": "Expected model output/answer"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{base_url}}/api/v1/finetune/upload-image",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "finetune", "upload-image"]
+            },
+            "description": "Upload an image to use as training data for fine-tuning. The image will be stored locally and uploaded to GCP for use in fine-tuning jobs."
+          }
+        },
+        {
+          "name": "Start Fine-Tuning Job",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"job_name\": \"my_finetune_job\",\n  \"base_model\": \"gemini-2.0-flash-exp\",\n  \"epochs\": 3,\n  \"learning_rate\": 0.0001,\n  \"description\": \"Fine-tune model for compliance checking\",\n  \"tags\": [\"compliance\", \"qa\"]\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/v1/finetune/start",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "finetune", "start"]
+            },
+            "description": "Start a fine-tuning job using uploaded training images. Returns job_id to track progress."
+          }
+        },
+        {
+          "name": "Get Fine-Tuning Job Status",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/v1/finetune/status/:job_id",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "finetune", "status", ":job_id"],
+              "variable": [
+                {
+                  "key": "job_id",
+                  "value": "your-job-id-here",
+                  "description": "Job ID returned from /finetune/start"
+                }
+              ]
+            },
+            "description": "Check the status of a fine-tuning job. Returns current status, progress, and any errors."
+          }
+        }
+      ]
+    }
+  ]
+}

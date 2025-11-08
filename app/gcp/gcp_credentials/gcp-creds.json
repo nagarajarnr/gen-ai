@@ -1,0 +1,15 @@
+{
+  "type": "service_account",
+  "project_id": "vertexai-469707",
+  "private_key_id": "5d2b660e663aca3973cf9d1cdab2238ed121e88a",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQC0PziwI2s75vLx\n+cdoD2unpp9BgHTDxYYVFIrzveRSeyVQiZHFDibCHi6VqzWlOkQi1aIvn388RG0E\n09TDwQhXe2J/Leh4xYecZVG60oN+GbKfxz7o061tw1fENp8wP+7dbeXTH3EtBiVP\nGgLEJGgPy9nY9FwER/q9+ojnaMaGQ/nnvwhIB4c4I5OwQwIkxCqQvrSJVnl1kYlh\n4KSD1fBvM/FjEbcYFngCXc8RRR0WazyclVunCw9qUleZQ2ihl90uKyng1HHlrU1d\nO6Xl1ghEWJ07X3wkUdawLib8LLFtV4IKySOg+k44lHNdMhpMQa69J8/NK81VXbTP\n2g+i0NibAgMBAAECggEATqFDzAbveTbDJc8mb51Gg+DamXr9tQeeeeS3xyPADkE9\nYnhY+GM3gjgjb1Q8d0NHRQD4GxlTqolZG6GDMBAt4Ofo7H0s7D6TbaT/deXuydxR\nAYWsSmpJPlhYmbaQVD6Xp84Q07xkJVWIggzhRwpwwO9XLd9Pouh5mFXKUlTxQdF5\nrkjkov46qSUwgE8p3EuHusK05ui3VNP6j/+ycAmFyiG505wI8aiwlKLvs7xrixHs\nRc2oYqYoCNmt3snLn6urt8vBey6RATCMznl69mKKhp9OLVxWnncwbgE7DOXqGR71\n8p8U9INxY5Pq0VfdcXoBTpROxZ0lqCfbkqXpa6Eu3QKBgQDz3g2h/sfmhMajQYDJ\nFCgIZ4GBhWoRb1R9yj+HKw1RDEuWCV5zocWdssaq2YFyexDok0j4aCpeLEWzcSq3\nl1D1qP9E47RoTP2QJPdbt7Mqj3R9LAyjBcxtklx85gcenBIYhCVp8DQFQP0gBxmj\nQTGibOeIPuwcTBaB2scVgqhttwKBgQC9NuKE7vDXdSCUx9JOz5R7U2WKpVnm/M1i\nvHFaT3CwJueNI1JhsLXYuj/0XUOUw0j2diOTnBZmGPex8AlN6DCNBgQBQhdNBTHT\n6OyeUP2szRCabIG82QBaxj1bkuBjSsEMcL3QKRu6afdyYPAImzgRJMJEN2WdfsNr\nptKDoMbsPQKBgEViChLrAEjvwew0+MU8/N7XRBtrr+/h8vIPFuAIObOzgdXgOIVB\no43ojWmSlKfTp83kCcDTMiq1Aee57ONrI9ehC2+4MV3zebkHK3Fm5IzZX9U1MSs4\nvR73o2TNtXzZ/rQG9PYdJ0/PW7U/D+ZI6CxEO+Ohs1+hrk2nxzixgeYlAoGAJ/PE\n1KjXNcdHf+LJZ1axVXEAicvsNbe/bk+354fKlYdBcS26IWJ8oyyAgIqI0IqDh3be\ngDZ/DEPNWUcDz+1tAvn4MoPQA7VLFiGihLM5PRl3ngO3STbQuloNbp6Ovqh0JrpP\nefqUHkJtuzr4s/iCWCxY0KqZzC2N+dcZsC1sk0kCgYA9sJnBZOVCNUPZpvGlTnfQ\nu8dV/oWn122f8dZtXqKK3Bzq5qNkdOLaO5PTjdCbJqNfDS89FpkUZ5SHalwThj8F\nv97J0OdbH9k3PQ5ajuZmgus6pGsjTlOk4wuE7qoaMwCH0D20pT0wQm6iUw/CdILV\ny/aqfB9Nz1j2DFYNDd2Y5w==\n-----END PRIVATE KEY-----\n",
+  "client_email": "vertexai@vertexai-469707.iam.gserviceaccount.com",
+  "client_id": "108480313152678764734",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/vertexai%40vertexai-469707.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}
+
+

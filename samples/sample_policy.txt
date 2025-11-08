@@ -1,0 +1,31 @@
+ACCORD COMPLIANCE COMPANY
+Sample Data Privacy Policy
+
+This is a sample compliance document for demonstration purposes.
+
+KEY PRINCIPLES:
+
+1. Data Minimization
+   Collect only data that is necessary for specified purposes.
+
+2. Storage Limitation
+   Retain data no longer than necessary for the processing purposes.
+
+3. Security Measures
+   - Implement appropriate technical safeguards
+   - Use encryption for data at rest and in transit
+   - Conduct regular security audits
+   - Maintain access controls
+
+4. Transparency
+   Inform data subjects about processing activities and their rights.
+
+5. Accountability
+   Maintain documentation of all processing activities and compliance measures.
+
+CONTACT INFORMATION:
+Data Protection Officer: dpo@accordcompliance.com
+Privacy Inquiries: privacy@accordcompliance.com
+
+Last Updated: January 1, 2025
+
